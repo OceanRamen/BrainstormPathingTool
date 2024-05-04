@@ -3,6 +3,7 @@ version = "1.0.0"
 dump_lua = true
 priority = 0
 
+#   __REALSE_MODE must be off for save-states to work
 [[patches]]
 [patches.pattern]
 target = "conf.lua"
@@ -12,6 +13,8 @@ payload = '_RELEASE_MODE = false'
 match_indent = true
 overwrite = true
 
+
+#   Inject brainstorm key handler
 [[patches]]
 [patches.pattern]
 target = "engine/controller.lua"
@@ -24,6 +27,7 @@ brainstorm.handleKeys(self, key, dt)
 match_indent = true
 overwrite = false
 
+#   Add core.lua to module list
 [[patches]]
 [patches.module]
 source = "core.lua"
