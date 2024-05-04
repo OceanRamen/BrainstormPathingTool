@@ -1,0 +1,31 @@
+[manifest]
+version = "1.0.0"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "conf.lua"
+pattern = "_RELEASE_MODE = true"
+position = "at"
+payload = '_RELEASE_MODE = false'
+match_indent = true
+overwrite = true
+
+[[patches]]
+[patches.pattern]
+target = "engine/controller.lua"
+pattern = 'if key == "p" then'
+position = "before"
+payload = '''
+local brainstorm = require("brainstorm")
+brainstorm.handleKeys(self, key, dt)
+'''
+match_indent = true
+overwrite = false
+
+[[patches]]
+[patches.module]
+source = "core.lua"
+before = "main.lua"
+name = "brainstorm"
